@@ -1,0 +1,54 @@
+import sys
+
+def quicksort(arr):
+    """
+    Fonction qui trie un tableau d'entiers en utilisant l'algorithme quicksort.
+    """
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+    return quicksort(left) + middle + quicksort(right)
+
+def remove_duplicates(arr):
+    """
+    Fonction qui supprime les valeurs en double d'un tableau trié.
+    """
+    return list(dict.fromkeys(arr))
+
+# Demande à l'utilisateur de choisir le mode de tri
+sort_order = input("Enter l'ordre de trie souhaitée (a pour l'odre croissant, d pour l'ordre decroissant): ")
+if sort_order != 'a':
+    sort_order = 'descending'
+else:
+    sort_order = 'ascending'
+
+# La suppression des doublons est activée par défaut
+remove_duplicate = True
+
+# Lit la liste de nombres en entrée
+arr = list(map(int, input("Enter la liste de nombre: ").strip().split()))
+
+# Trie la liste
+sorted_arr = quicksort(arr)
+
+# Inverse l'ordre si l'option de tri décroissant est spécifiée
+if sort_order == 'descending':
+    sorted_arr = sorted_arr[::-1]
+
+# Supprime les doublons si l'option est spécifiée 
+if remove_duplicate:
+    sorted_arr = remove_duplicates(sorted_arr)
+
+# Affiche la liste triée
+print("Sorted list: ", sorted_arr)
+
+
+
+"""
+    Dans ce code, l'utilisateur est invité à entrer "a" pour un tri croissant ou "d" pour un tri décroissant. 
+    La suppression des doublons est activée par défaut, donc l'utilisaateur n'a pas besoin de spécifier cette option.
+"""
+
